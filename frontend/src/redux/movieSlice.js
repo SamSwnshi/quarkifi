@@ -74,7 +74,7 @@ const moviesSlice = createSlice({
         searchMoviesSuccess: (state, action) => {
             state.loading = false;
             state.isSearching = false;
-            state.search = action.payload.results || action.payload;
+            state.search = action.payload.titles || action.payload.results || action.payload;
         },
         clearSearch: (state) => {
             state.search = [];

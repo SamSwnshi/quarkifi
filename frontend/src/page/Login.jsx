@@ -14,7 +14,7 @@ const Login = () => {
         e.preventDefault();
         if (username && password) {
             dispatch(login({ username }));
-            navigate('/', { replace: true });
+            navigate('/');
         } else {
             alert('Please enter dummy credentials.');
         }

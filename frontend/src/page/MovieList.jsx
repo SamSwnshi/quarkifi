@@ -26,6 +26,9 @@ const MovieList = () => {
   } = useSelector(state => state.movies);
   const displayList = currentQuery ? search : list;
   const isSearchActive = !!currentQuery;
+  
+  // Debug logging
+  console.log('MovieList state:', { currentQuery, isSearchActive, searchLength: search.length, listLength: list.length, displayListLength: displayList.length });
 
   const getMovies = async () => {
     if (isSearchActive) return;
@@ -44,11 +47,8 @@ const MovieList = () => {
     }
   }
   useEffect(() => {
-    if (isSearchActive) {
-      dispatch(clearSearch());
-      return;
-    }
-    if (list.length === 0 && !loading) {
+    // Only fetch movies if we're not in search mode and the list is empty
+    if (!isSearchActive && list.length === 0 && !loading) {
       getMovies();
     }
   }, [isSearchActive, list.length, loading, dispatch]);
@@ -78,7 +78,7 @@ const MovieList = () => {
           >
             
             <img
-              src={movie.primaryImage.url || 'https://via.placeholder.com/150x225?text=No+Poster'}
+              src={movie.primaryImage?.url }
               alt={movie.originalTitle}
               className="w-full h-94 object-cover rounded mb-2"
             />

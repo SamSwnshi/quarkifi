@@ -8,7 +8,6 @@ const Header = () => {
                 <Link to="/">
                     <h1 className="text-xl">IMDb Movie List</h1>
                 </Link>
-
                 <Link
                     to="/login"
                     className="bg-pink-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition duration-200"

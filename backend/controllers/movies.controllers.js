@@ -43,4 +43,25 @@ export const searchMovies = async (req, res) => {
       .status(500)
       .json({ error: "Failed to search movies from external service." });
   }
-}
+};
+
+export const searchById = async (req, res) => {
+  const { id } = req.params;
+  if (!id) {
+    return res.status(400).json({ error: "Movie ID is required." });
+  }
+  try {
+    const url = `${IMDB_URL}/titles/${id}`;
+    const response = await axios.get(url);
+    const data = response.data;
+    res.json(data);
+  } catch (error) {
+    console.error(
+      "Error fetching movie details from IMDb API:",
+      error.response?.data || error.message
+    );
+    res
+      .status(500)
+      .json({ error: "Failed to fetch movie details from external service." });
+  }
+};

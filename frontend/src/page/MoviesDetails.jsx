@@ -12,7 +12,7 @@ import {
     clearDetails 
 } from '../redux/movieSlice';
 
-const API_BASE_URL = 'http://localhost:8080/api';
+const API_BASE_URL = import.meta.env.VITE_API_URL;
 
 function MovieDetails() {
   const { id } = useParams();
@@ -56,7 +56,7 @@ function MovieDetails() {
     <div className="mt-8 p-6 border rounded shadow-lg">
       <button 
           onClick={() => navigate(-1)} 
-          className="mb-4 text-blue-500 hover:text-blue-700 font-semibold"
+          className="mb-4 text-pink-500 hover:text-pink-700 font-semibold"
       >
         &larr; Back to List
       </button>

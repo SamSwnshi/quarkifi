@@ -7,7 +7,7 @@ import {
     setError
 } from '../redux/movieSlice';
 import { addSearch } from '../redux/historySlice';
-const API_BASE_URL = 'http://localhost:8080/api';
+const API_BASE_URL = import.meta.env.VITE_API_URL;
 
 const SearchPage = () => {
     const [query, setQuery] = useState('');

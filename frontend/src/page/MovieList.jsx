@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from 'react-redux'; import {
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-const API_BASE_URL = 'http://localhost:8080/api';
+const API_BASE_URL = import.meta.env.VITE_API_URL;
 
 
 const MovieList = () => {
@@ -26,8 +26,7 @@ const MovieList = () => {
   } = useSelector(state => state.movies);
   const displayList = currentQuery ? search : list;
   const isSearchActive = !!currentQuery;
-  
-  // Debug logging
+
   console.log('MovieList state:', { currentQuery, isSearchActive, searchLength: search.length, listLength: list.length, displayListLength: displayList.length });
 
   const getMovies = async () => {
@@ -47,7 +46,6 @@ const MovieList = () => {
     }
   }
   useEffect(() => {
-    // Only fetch movies if we're not in search mode and the list is empty
     if (!isSearchActive && list.length === 0 && !loading) {
       getMovies();
     }
@@ -69,11 +67,11 @@ const MovieList = () => {
         {isSearchActive ? `Search Results for "${currentQuery}"` : 'Popular Movies'}
       </h2>
 
-      <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
+      <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4 ">
         {displayList.map(movie => (
           <div
             key={movie.id}
-            className="border p-4 rounded shadow cursor-pointer hover:shadow-lg transition duration-300"
+            className="border p-4 rounded shadow cursor-pointer hover:shadow-lg transition duration-300 hover:scale-105"
             onClick={() => handleMovieClick(movie.id)}
           >
             
@@ -92,7 +90,7 @@ const MovieList = () => {
         <div className="text-center mt-6">
           <button
             onClick={handleLoadMore}
-            className="bg-green-500 text-white p-3 rounded hover:bg-green-600 disabled:opacity-50"
+            className="bg-pink-500 text-white p-3 rounded hover:bg-pink-600 disabled:opacity-50"
             disabled={loading}
           >
             Load More Movies

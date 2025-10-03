@@ -40,4 +40,4 @@ const searchHistorySlice = createSlice({
 });
 
 export const { searchHistory } = searchHistorySlice.actions;
-export default searchHistory.reducers;
+export default searchHistory.reducer;

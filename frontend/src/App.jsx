@@ -1,13 +1,20 @@
-import React from 'react'
+import React, { Children } from 'react'
 import './App.css'
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom'
 import Header from './components/Header'
 import Login from './page/Login'
 import SearchPage from './page/SearchPage'
 import MovieList from './page/MovieList'
+import { useSelector } from 'react-redux'
+
+const ProtectedRoutes = ({children}) =>{
+  const isAuth = useSelector((state) => state.auth.isAuth)
+  if(!isAuth){
+    return <Navigate to='/login'/>
+  }
+  return children;
+}
 function App() {
-
-
   return (
     <>
       <Router>

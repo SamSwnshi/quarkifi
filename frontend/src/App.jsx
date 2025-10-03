@@ -6,6 +6,7 @@ import Login from './page/Login'
 import SearchPage from './page/SearchPage'
 import MovieList from './page/MovieList'
 import { useSelector } from 'react-redux'
+import MovieDetails from './page/MoviesDetails'
 
 const ProtectedRoutes = ({children}) =>{
   const isAuth = useSelector((state) => state.auth.isAuth)
@@ -21,8 +22,20 @@ function App() {
         <Header />
         <Routes>
           <Route path='/login' element={<Login/>}/>
-          <Route path='/' element={<SearchPage/> }/>
-          <Route path='/' element={<MovieList/> }/>
+          <Route path='/' element={
+            <div>
+              <SearchPage/>
+              <MovieList/>
+            </div>
+          }/>
+          <Route 
+            path="/movies/:id" 
+            element={
+              <ProtectedRoutes>
+                <MovieDetails />
+              </ProtectedRoutes>
+            } 
+          />
         </Routes>
       </Router>
     </>

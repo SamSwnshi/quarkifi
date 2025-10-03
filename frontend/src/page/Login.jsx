@@ -1,14 +1,28 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
+import { useDispatch, useSelector } from 'react-redux';
+import {login } from '../redux/userSlice'
 const Login = () => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
-    const navigate = useNavigate()
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const isAuthenticated = useSelector((state) => state.auth.isAuth);
+
+
     const handleSubmit = (e) => {
         e.preventDefault();
-        navigate('/')
+        if (username && password) {
+            dispatch(login({ username }));
+            navigate('/', { replace: true });
+        } else {
+            alert('Please enter dummy credentials.');
+        }
     };
+    if (isAuthenticated) {
+        navigate('/');
+        return null;
+    }
     return (
         <div className="max-w-md mx-auto mt-10 border-2 p-7 rounded-2xl ">
             <h2 className="text-2xl font-bold mb-4">Login </h2>

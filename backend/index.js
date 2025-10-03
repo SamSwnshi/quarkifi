@@ -6,11 +6,12 @@ import moviesRouter from './routes/routes.js'
 dotenv.config()
 
 const app = express()
-const port = process.env.PORT;
+const port = process.env.PORT || 3000;
 
 app.use(cors())
 app.use(express.json())
 app.use('/api',moviesRouter)
+
 app.listen(port,()=>{
     console.log(`Server Is Running in PORT: ${port}`)
     
